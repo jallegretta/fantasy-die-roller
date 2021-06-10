@@ -2,21 +2,26 @@
 //pass the result to the result list
 //allow the user to enter a name for the roll and save it
 
-import React from 'react';
+import React, {useState} from 'react';
+import {v4 as uuid } from "uuid";
 
-const DiceRoller = ({id, handleDieRoll}) => {
-
-    function handleDieDoll(min, max){
+const DiceRoller = () => {
+    const [faces, setFaces] = useState(6)
+    function createDie(min, max){
+        const newDie = {
+            id:uuid(),
+            roll: null,
+            name: null
+        }
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1) + min); 
-        
+        newDie.roll = Math.floor(Math.random() * (max - min + 1) + min); 
+        console.log(newDie)
       }
-      //const result = handleDieDoll(1 , 8);
     
     return (<div style={{border: "1px solid black"}}>
         <h1>Dice Roller</h1>
-        <h3>{id}</h3>
+        
         <label for="name">How many dice??:</label>
         <input type="text" id="number" name="name" required
         minlength="1" size="3"></input> 
@@ -24,7 +29,7 @@ const DiceRoller = ({id, handleDieRoll}) => {
         <label for="name">How many faces?:</label>
         <input type="text" id="type" name="name" required
         minlength="1" size="3"></input>
-        <button onClick={()=> handleDieRoll}>Roll your dice!</button>
+        <button onClick={()=>createDie(1,faces)}>Roll your dice!</button>
         <p>result{}</p>
         
       
