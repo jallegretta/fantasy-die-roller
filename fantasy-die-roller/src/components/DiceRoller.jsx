@@ -24,7 +24,7 @@ const DiceRoller = ({id, handleDieRoll}) => {
         <label for="name">How many faces?:</label>
         <input type="text" id="type" name="name" required
         minlength="1" size="3"></input>
-        <button onClick={handleDieRoll}>Roll your dice!</button>
+        <button onClick={()=> handleDieRoll}>Roll your dice!</button>
         <p>result{}</p>
         
       

@@ -6,7 +6,7 @@ function ResultList(){
 return (
     <>      
     <h1>Result List</h1>
-    <p>result but in {}</p>
+    <p>...result</p>
     </>
 );
 }

@@ -1,9 +1,14 @@
 import React from 'react';
-import DiceTray from './components/DiceTray';
-
+import DiceRoller from './components/DiceRoller';
+import ResultList from './components/ResultList';
+import SavedRolls from './components/SavedRolls';
 function App(){
-return (
-  <DiceTray />
+  return (
+    <>
+    <DiceRoller />
+    <SavedRolls />
+    <ResultList />
+    </> 
 )
 }
 
