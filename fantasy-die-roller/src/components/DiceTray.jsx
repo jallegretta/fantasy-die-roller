@@ -2,9 +2,10 @@ import React from 'react';
 import DiceRoller from './DiceRoller';
 import ResultList from './ResultList';
 import SavedRolls from './SavedRolls';
-//import './src/css/DiceTray.css';
+import '../css/DiceTray.css'
 
 function DiceTray(){
+    
 return (
     <>
     <DiceRoller />
