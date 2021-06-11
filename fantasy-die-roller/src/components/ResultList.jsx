@@ -5,7 +5,7 @@ import '../css/ResultList.css';
 
 function ResultList(){
 return (
-    <div className='list'>      
+    <div style={{border: "0px solid black"}}>      
         <h1>Result List</h1>
         <p>...result</p>
     </div>
