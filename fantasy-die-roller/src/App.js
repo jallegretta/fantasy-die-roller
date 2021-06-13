@@ -6,10 +6,9 @@ import {v4 as uuid } from "uuid";
 import './css/App.css';
 
 function App(){
-  const [faces, setFaces] = useState(6)
+  const [faces, setFaces] = useState()
   
   const handleClick = (e)=>{
-    setFaces(faces)
     createDie(1,faces)
     e.preventDefault();
   }
@@ -22,8 +21,7 @@ function App(){
       min = Math.ceil(min);
       max = Math.floor(max);
       newDie.roll = Math.floor(Math.random() * (max - min + 1) + min); 
-      console.log(newDie.roll) ;
-     
+      console.log(newDie.roll);
     }
   
   return (

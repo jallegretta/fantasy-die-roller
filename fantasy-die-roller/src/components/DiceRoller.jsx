@@ -8,7 +8,11 @@ const DiceRoller = ({ handleClick, createDie, setFaces, result, faces }) => {
         <h1>Dice Roller</h1>
         <form>
         <label>How many sides??:</label>
-        <input type="text"></input>
+        <input 
+            type="text"
+            value={faces}
+            onChange= {(e)=> setFaces(e.target.value)}    
+        />
         <button onClick={()=>{handleClick()}}>Roll your dice!</button>
         </form>
         <p>Your current result:{(result)}</p>
