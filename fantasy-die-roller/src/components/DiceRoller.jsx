@@ -4,9 +4,13 @@ import "../App"
 
 const DiceRoller = ({ handleClick, createDie, setFaces, result, faces }) => {
 
+const handleSubmit = (e) => {
+    e.preventDefault();
+}
+
     return (<div style={{border: "1px solid black"}}>
         <h1>Dice Roller</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
         <label>How many sides??:</label>
         <input 
             type="text"

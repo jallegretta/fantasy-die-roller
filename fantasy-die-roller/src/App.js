@@ -8,9 +8,8 @@ import './css/App.css';
 function App(){
   const [faces, setFaces] = useState()
   
-  const handleClick = (e)=>{
+  const handleClick = ()=>{
     createDie(1,faces)
-    e.preventDefault();
   }
     function createDie(min, max){
       const newDie = {
