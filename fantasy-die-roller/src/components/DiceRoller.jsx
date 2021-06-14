@@ -2,7 +2,7 @@
 import React from 'react';
 import "../App"
 
-const DiceRoller = ({ handleClick, setFaces, result, faces }) => {
+const DiceRoller = ({ setRollName, rollName, handleSave, handleRoll, setFaces, faces }) => {
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +17,15 @@ const handleSubmit = (e) => {
             value={faces}
             onChange= {(e)=> setFaces(e.target.value)}    
         />
-        <button onClick={()=>{handleClick()}}>Roll your dice!</button>
+        <button onClick={()=>{handleRoll()}}>Roll your dice!</button>
+        <div></div>
+        <label>Give a name to save</label>
+        <input 
+            type="text"
+            value={rollName}
+            onChange= {(e)=> setRollName(e.target.value)}    
+        />
+        <button onClick={()=>{handleSave()}}>Save this roll!</button>
         </form>
            
     </div>
