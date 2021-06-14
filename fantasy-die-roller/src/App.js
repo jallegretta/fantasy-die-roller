@@ -7,10 +7,19 @@ import './css/App.css';
 
 function App(){
   const [faces, setFaces] = useState()
-  
+  const [result, setResult] = useState()
+  const [resultList, setResultList] = useState()
+
+  const handleList = (result) => {
+      setResultList([...resultList, result]);
+  }
+  const handleResult = (result)=> {
+    setResult(result)
+  }
   const handleClick = ()=>{
     createDie(1,faces)
   }
+
     function createDie(min, max){
       const newDie = {
           id:uuid(),
@@ -19,15 +28,17 @@ function App(){
       }
       min = Math.ceil(min);
       max = Math.floor(max);
-      newDie.roll = Math.floor(Math.random() * (max - min + 1) + min); 
+      handleList(handleResult(newDie.roll = Math.floor(Math.random() * (max - min + 1) + min))); 
       console.log(newDie.roll);
+      return newDie.roll;
+      
     }
   
   return (
     <>
-    <DiceRoller handleClick= {handleClick} createDie = {createDie} setFaces = {setFaces}/>
+    <DiceRoller result = {result} handleClick= {handleClick} createDie = {createDie} setFaces = {setFaces}/>
     <SavedRolls />
-    <ResultList />
+    <ResultList result = {result}/>
     </> 
 )
 }
