@@ -10,14 +10,12 @@ function App(){
   const [result, setResult] = useState()
   const [resultList, setResultList] = useState()
 
-  const handleList = (result) => {
-      setResultList([...resultList, result]);
-  }
   const handleResult = (result)=> {
     setResult(result)
   }
   const handleClick = ()=>{
     createDie(1,faces)
+    setResultList([resultList]);
   }
 
     function createDie(min, max){
@@ -28,7 +26,7 @@ function App(){
       }
       min = Math.ceil(min);
       max = Math.floor(max);
-      handleList(handleResult(newDie.roll = Math.floor(Math.random() * (max - min + 1) + min))); 
+      handleResult(newDie.roll = Math.floor(Math.random() * (max - min + 1) + min)); 
       console.log(newDie.roll);
       return newDie.roll;
       
@@ -36,7 +34,7 @@ function App(){
   
   return (
     <>
-    <DiceRoller result = {result} handleClick= {handleClick} createDie = {createDie} setFaces = {setFaces}/>
+    <DiceRoller resultList = {resultList} result = {result} handleClick= {handleClick} createDie = {createDie} setFaces = {setFaces}/>
     <SavedRolls />
     <ResultList result = {result}/>
     </> 
