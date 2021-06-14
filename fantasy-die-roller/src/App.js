@@ -11,7 +11,7 @@ function App(){
   const [rollName, setRollName] = useState()
   const [result, setResult] = useState()
   const [resultList, setResultList] = useState()
-  const [rolls, setRolls] = useState(null);
+  const [rolls, setRolls] = useState();
 
   useEffect(()=>{
       fetch('https://allegretta-json-api.herokuapp.com/rolls')
@@ -24,19 +24,42 @@ function App(){
           });
   },[]);
 
+  const handleReroll = ()=> {
+    fetch('https://allegretta-json-api.herokuapp.com/rolls/2', {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+    })
+    .then(res => {
+      return res.json();
+  })
+  .then(data => {
+      console.log(data);
+      handleRoll(data.faces)
+  });
+  }
+  const handleDelete = ()=> {
+    fetch('https://allegretta-json-api.herokuapp.com/rolls/3', {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(savedDie)
+    })
+  }
+
   const handleResult = (result)=> {
     setResult(result)
   }
+
   const handleRoll = ()=>{
     createDie(1,faces)
     setResultList(result);
   }
-  const savedDie = { faces };
+
+  const savedDie = { rollName, faces };
   const handleSave = ()=>{
     fetch('https://allegretta-json-api.herokuapp.com/rolls', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(savedDie)
+      body: JSON.stringify(savedDie) 
     })
   };
 
@@ -48,16 +71,31 @@ function App(){
       }
       min = Math.ceil(min);
       max = Math.floor(max);
-      handleResult(newDie.roll = Math.floor(Math.random() * (max - min + 1) + min)); 
-      console.log(newDie.roll);
+      handleResult(newDie.roll = Math.floor(Math.random() * (max - min + 1) + min));
       return newDie.roll;
       
     }
   
   return (
     <>
-    <DiceRoller setRollName = {setRollName} rollName = {rollName} handleSave = {handleSave} resultList = {resultList} result = {result} handleRoll= {handleRoll} createDie = {createDie} setFaces = {setFaces}/>
-    {rolls && <SavedRolls rollName = {rolls.name} rollFaces = {rolls.faces} />}
+    <DiceRoller 
+      setFaces = {setFaces}
+      createDie = {createDie}
+      handleRoll= {handleRoll} 
+      setRollName = {setRollName}
+      handleSave = {handleSave} 
+      rollName = {rollName} 
+      resultList = {resultList} 
+      result = {result} 
+      />
+
+    {rolls && <SavedRolls 
+    handleReroll = {handleReroll}
+    handleDelete = {handleDelete}
+    rollName = {rolls.name} 
+    rollFaces = {rolls.faces} 
+    />}
+
     <ResultList result = {result}/>
     </> 
 )
