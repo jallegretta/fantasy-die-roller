@@ -1,11 +1,11 @@
 import React from 'react';
 
-function SavedRolls(props){
+function SavedRolls({result}){
 
 return (
     <div style={{border: "0px solid black"}}> 
         <h1>Saved RollsComponent</h1>
-        <p>{props.result}</p>
+        <p>{result}</p>
         <button>Re Roll</button>
         <button>Delete</button>
         

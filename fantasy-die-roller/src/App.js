@@ -8,14 +8,14 @@ import './css/App.css';
 function App(){
   const [faces, setFaces] = useState()
   const [result, setResult] = useState()
-  const [resultList, setResultList] = useState()
+  const [resultList=[""], setResultList] = useState()
 
   const handleResult = (result)=> {
     setResult(result)
   }
   const handleClick = ()=>{
     createDie(1,faces)
-    setResultList([resultList]);
+    setResultList(result);
   }
 
     function createDie(min, max){
@@ -35,7 +35,7 @@ function App(){
   return (
     <>
     <DiceRoller resultList = {resultList} result = {result} handleClick= {handleClick} createDie = {createDie} setFaces = {setFaces}/>
-    <SavedRolls />
+    <SavedRolls result = {result}/>
     <ResultList result = {result}/>
     </> 
 )
