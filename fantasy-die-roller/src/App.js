@@ -11,21 +11,24 @@ function App(){
   const [rollName, setRollName] = useState()
   const [result, setResult] = useState()
   const [resultList, setResultList] = useState()
-  const [rolls, setRolls] = useState();
+  const [rolls, setRolls] = useState()
+  const [dice, setDice]= useState([])
+  const savedDie = { rollName, faces };
 
   useEffect(()=>{
-      fetch('https://allegretta-json-api.herokuapp.com/rolls')
-          .then(res => {
-              return res.json();
-          })
-          .then(data => {
-              console.log(data);
-              setRolls(data)
-          });
-  },[]);
+    fetch('https://allegretta-json-api.herokuapp.com/rolls')
+        .then(res => {
+            return res.json();
+        })
+        .then(dice => {
+          setRolls(dice)
+          setDice(dice);
+          console.log(dice)
+        });
+},[]);
 
   const handleReroll = ()=> {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls/', {
+    fetch('https://allegretta-json-api.herokuapp.com/rolls/{dieRoll.id}', {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
     })
@@ -37,44 +40,52 @@ function App(){
       handleRoll(data.faces)
   });
   }
+
   const handleDelete = ()=> {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls/', {
+    fetch('https://allegretta-json-api.herokuapp.com/rolls/' + savedDie.id , {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(savedDie)
     })
   }
 
-  const handleResult = (result)=> {
-    setResult(result)
-  }
-
-  const handleRoll = ()=>{
-    createDie(1,faces)
-    setResultList(result);
-  }
-
-  const savedDie = { rollName, faces };
   const handleSave = ()=>{
-    fetch('https://allegretta-json-api.herokuapp.com/rolls', {
+    fetch('https://allegretta-json-api.herokuapp.com/rolls' + savedDie.id , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(savedDie) 
     })
   };
 
-    function createDie(min, max){
-      const newDie = {
-          id:uuid(),
-          roll: null,
-          name: null
-      }
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      handleResult(newDie.roll = Math.floor(Math.random() * (max - min + 1) + min));
-      return newDie.roll;
-      
+  // const handleUpdate = ()=> {
+  //   fetch('https://allegretta-json-api.herokuapp.com/rolls/{}', {
+  //     method: 'PATCH',
+  //     headers: {'Content-Type': 'application/json'},
+  //     body: JSON.stringify(savedDie)
+  //   })
+  // }
+
+  const handleRoll = ()=>{
+    createDie(1,faces)
+    setResultList(result)
+  }
+
+  const handleResult = (result)=> {
+    setResult(result)
+  }
+
+  function createDie(min, max){
+    const newDie = {
+        id:uuid(),
+        roll: null,
+        name: null
     }
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    handleResult(newDie.roll = Math.floor(Math.random() * (max - min + 1) + min));
+    return newDie.roll;
+    
+  }
   
   return (
     <>
@@ -92,7 +103,7 @@ function App(){
     {rolls && <SavedRolls 
     handleReroll = {handleReroll}
     handleDelete = {handleDelete}
-
+    dice = {dice}
     />}
 
     <ResultList result = {result}/>
