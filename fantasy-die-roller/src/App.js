@@ -25,7 +25,7 @@ function App(){
   },[]);
 
   const handleReroll = ()=> {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls/2', {
+    fetch('https://allegretta-json-api.herokuapp.com/rolls/', {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
     })
@@ -92,8 +92,7 @@ function App(){
     {rolls && <SavedRolls 
     handleReroll = {handleReroll}
     handleDelete = {handleDelete}
-    rollName = {rolls.name} 
-    rollFaces = {rolls.faces} 
+
     />}
 
     <ResultList result = {result}/>
