@@ -27,30 +27,8 @@ function App(){
         });
 },[]);
 
-  const handleReroll = ()=> {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls/{dieRoll.id}', {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'},
-    })
-    .then(res => {
-      return res.json();
-  })
-  .then(data => {
-      console.log(data);
-      handleRoll(data.faces)
-  });
-  }
-
-  const handleDelete = ()=> {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls/' + savedDie.id , {
-      method: 'DELETE',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(savedDie)
-    })
-  }
-
   const handleSave = ()=>{
-    fetch('https://allegretta-json-api.herokuapp.com/rolls' + savedDie.id , {
+    fetch(`https://allegretta-json-api.herokuapp.com/rolls/`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(savedDie) 
@@ -58,7 +36,7 @@ function App(){
   };
 
   // const handleUpdate = ()=> {
-  //   fetch('https://allegretta-json-api.herokuapp.com/rolls/{}', {
+  //   fetch(`https://allegretta-json-api.herokuapp.com/rolls/${}`, {
   //     method: 'PATCH',
   //     headers: {'Content-Type': 'application/json'},
   //     body: JSON.stringify(savedDie)
@@ -101,9 +79,9 @@ function App(){
       />
 
     {rolls && <SavedRolls 
-    handleReroll = {handleReroll}
-    handleDelete = {handleDelete}
+    handleRoll = {handleRoll}
     dice = {dice}
+    savedDie = {savedDie}
     />}
 
     <ResultList result = {result}/>
