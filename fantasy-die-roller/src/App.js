@@ -38,7 +38,7 @@ function App(){
   });
   }
   const handleDelete = ()=> {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls/3', {
+    fetch('https://allegretta-json-api.herokuapp.com/rolls/', {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(savedDie)
