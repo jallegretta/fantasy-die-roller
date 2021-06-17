@@ -1,21 +1,19 @@
 import React from 'react';
-import { useState } from 'react/cjs/react.development';
+import { useState, useEffect } from 'react/cjs/react.development';
 
 function SavedRolls({ handleReroll, handleDelete }){
 
-const [dice, setDice]= useState([()=> {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls', {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'},
-    })
-    .then(res => {
-      return res.json();
-  })
-  .then(dice => {
-      console.log(dice);
-  });
-  }]);
-
+useEffect(()=>{
+    fetch('https://allegretta-json-api.herokuapp.com/rolls')
+        .then(res => {
+            return res.json();
+        })
+        .then(dice => {
+            setDice(dice);
+            console.log(dice)
+        });
+},[]);
+const [dice, setDice]= useState([]);
 return (
     <div > 
         {dice.map((dieRoll) =>(
@@ -25,8 +23,7 @@ return (
             <button onClick={handleDelete}>Delete</button>
         </div>
         ))}
-    </div>
-        
+    </div>  
  )}     
 
 export default SavedRolls;
