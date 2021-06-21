@@ -7,13 +7,14 @@ import './css/App.css';
 import { useEffect } from 'react/cjs/react.development';
 
 function App(){
+  const [rolls, setRolls] = useState()
   const [faces, setFaces] = useState()
   const [rollName, setRollName] = useState()
+  const [id,setId]= useState()
   const [result, setResult] = useState()
   const [resultList, setResultList] = useState()
-  const [rolls, setRolls] = useState()
   const [dice, setDice]= useState([])
-  const savedDie = { rollName, faces };
+  const savedDie = { id, rollName, faces };
 
   useEffect(()=>{
     fetch('https://allegretta-json-api.herokuapp.com/rolls')
@@ -35,13 +36,13 @@ function App(){
     })
   };
 
-  // const handleUpdate = ()=> {
-  //   fetch(`https://allegretta-json-api.herokuapp.com/rolls/${}`, {
-  //     method: 'PATCH',
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: JSON.stringify(savedDie)
-  //   })
-  // }
+  const handleUpdate = ()=> {
+    fetch(`https://allegretta-json-api.herokuapp.com/rolls/`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(savedDie)
+    })
+  }
 
   const handleRoll = ()=>{
     createDie(1,faces)
@@ -76,12 +77,14 @@ function App(){
       rollName = {rollName} 
       resultList = {resultList} 
       result = {result} 
+      id = {dice.id}
       />
 
     {rolls && <SavedRolls 
     handleRoll = {handleRoll}
-    dice = {dice}
     savedDie = {savedDie}
+    dice = {dice}
+    id = {dice.id}
     />}
 
     <ResultList result = {result}/>

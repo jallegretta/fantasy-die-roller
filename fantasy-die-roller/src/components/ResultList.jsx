@@ -1,7 +1,4 @@
-//Display the result
-
 import React from 'react';
-import '../css/ResultList.css';
 
 function ResultList({result, resultList}){
     
