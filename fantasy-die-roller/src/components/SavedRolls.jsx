@@ -29,7 +29,7 @@ return (
     <div > 
         {dice.map((dieRoll) =>(
         <div key={dieRoll.id}>
-            <h3>Name of Weapon: {dieRoll.id}{dieRoll.rollName}</h3>
+            <h3>Name of Weapon:  {dieRoll.rollName}</h3>
             <button onClick={()=>{handleReroll(id)}}>Re Roll</button>
             <button onClick={()=>{handleDelete(dieRoll.id)}}>Delete</button>
         </div>
