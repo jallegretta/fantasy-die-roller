@@ -1,40 +1,39 @@
 import React from 'react';
 
-function SavedRolls({ handleRoll, dice, savedDie, id }){
-    const diceID = {id}
-    const handleReroll = (id)=> {
-        fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
-          method: 'GET',
-          headers: {'Content-Type': 'application/json'},
-        })
-        .then(res => {
-          return res.json();
+function SavedRolls({ handleRoll, dice, savedDie }) {
+  const handleReroll = (id) => {
+    fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => {
+        return res.json();
       })
       .then(dice => {
-          console.log(dice);
-          console.log(id);
-          handleRoll(dice.faces)
+        console.log(dice);
+        handleRoll(dice.faces)
       });
-      }
+  }
 
-      const handleDelete = (id)=> {
-        fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
-          method: 'DELETE',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(savedDie)
-        })
-      }
+  const handleDelete = (id) => {
+    fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(savedDie)
+    })
+  }
 
-return (
-    <div > 
-        {dice.map((dieRoll) =>(
+  return (
+    <div >
+      {dice.map((dieRoll) => (
         <div key={dieRoll.id}>
-            <h3>Name of Weapon:  {dieRoll.rollName}</h3>
-            <button onClick={()=>{handleReroll(dieRoll.id)}}>Re Roll</button>
-            <button onClick={()=>{handleDelete(dieRoll.id)}}>Delete</button>
+          <h3>Name of Weapon:  {dieRoll.rollName}</h3>
+          <button onClick={() => { handleReroll(dieRoll.id) }}>Re Roll</button>
+          <button onClick={() => { handleDelete(dieRoll.id) }}>Delete</button>
         </div>
-        ))}
-    </div>  
- )}     
+      ))}
+    </div>
+  )
+}
 
 export default SavedRolls;
