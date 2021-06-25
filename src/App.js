@@ -7,7 +7,7 @@ import './css/App.css';
 import { useEffect } from 'react/cjs/react.development';
 
 function App(){
-  const [rolls, setRolls] = useState()
+  //const [rolls, setRolls] = useState()
   const [faces, setFaces] = useState()
   const [rollName, setRollName] = useState()
   const [id,setId]= useState()
@@ -15,17 +15,17 @@ function App(){
   const [dice, setDice]= useState([])
   const savedDie = { id, rollName, faces };
 
-  useEffect(()=>{
+  // useEffect(()=>{
     fetch('https://allegretta-json-api.herokuapp.com/rolls')
         .then(res => {
             return res.json();
         })
         .then(dice => {
-          setRolls(dice)
+          //setRolls(dice)
           setDice(dice);
           console.log(dice)
         });
-},[]);
+// },[]);
 
   const handleSave = ()=>{
     fetch(`https://allegretta-json-api.herokuapp.com/rolls/`, {
@@ -77,12 +77,12 @@ function App(){
       id = {dice.id}
       />
 
-    {rolls && <SavedRolls 
+    <SavedRolls 
     handleRoll = {handleRoll}
     savedDie = {savedDie}
     dice = {dice}
     id = {dice.id}
-    />}
+    />
 
     <ResultList result = {result}/>
     </> 
