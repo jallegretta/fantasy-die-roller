@@ -3,7 +3,7 @@ import React from 'react';
 function SavedRolls({ handleRoll, dice, savedDie, id }){
     const diceID = {id}
     const handleReroll = (id)=> {
-        fetch(`https://allegretta-json-api.herokuapp.com/rolls/${diceID}`, {
+        fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
         })
@@ -17,7 +17,7 @@ function SavedRolls({ handleRoll, dice, savedDie, id }){
       });
       }
 
-      const handleDelete = ()=> {
+      const handleDelete = (id)=> {
         fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
           method: 'DELETE',
           headers: {'Content-Type': 'application/json'},
@@ -30,7 +30,7 @@ return (
         {dice.map((dieRoll) =>(
         <div key={dieRoll.id}>
             <h3>Name of Weapon:  {dieRoll.rollName}</h3>
-            <button onClick={()=>{handleReroll(id)}}>Re Roll</button>
+            <button onClick={()=>{handleReroll(dieRoll.id)}}>Re Roll</button>
             <button onClick={()=>{handleDelete(dieRoll.id)}}>Delete</button>
         </div>
         ))}

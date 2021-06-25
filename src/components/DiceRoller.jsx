@@ -13,7 +13,7 @@ const handleSubmit = (e) => {
         <form onSubmit={handleSubmit}>
         <label>How many sides??:</label>
         <input 
-            type="text"
+            type="number"
             value={faces}
             onChange= {(e)=> setFaces(e.target.value)}    
         />

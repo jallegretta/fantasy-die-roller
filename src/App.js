@@ -12,7 +12,6 @@ function App(){
   const [rollName, setRollName] = useState()
   const [id,setId]= useState()
   const [result, setResult] = useState()
-  const [resultList, setResultList] = useState()
   const [dice, setDice]= useState([])
   const savedDie = { id, rollName, faces };
 
@@ -37,7 +36,7 @@ function App(){
   };
 
   const handleUpdate = ()=> {
-    fetch(`https://allegretta-json-api.herokuapp.com/rolls/`, {
+    fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(savedDie)
@@ -46,7 +45,6 @@ function App(){
 
   const handleRoll = ()=>{
     createDie(1,faces)
-    setResultList(result)
   }
 
   const handleResult = (result)=> {
@@ -75,7 +73,6 @@ function App(){
       setRollName = {setRollName}
       handleSave = {handleSave} 
       rollName = {rollName} 
-      resultList = {resultList} 
       result = {result} 
       id = {dice.id}
       />

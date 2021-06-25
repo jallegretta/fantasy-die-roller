@@ -1,13 +1,12 @@
 import React from 'react';
 
-function ResultList({result, resultList}){
+function ResultList({result}){
     
     
 return (
     <div style={{border: "0px solid black"}}>      
         <h1>Result List</h1>
         <p> Your Current Roll:{result}</p>
-        <p> {resultList} </p>
     </div>
 );
 }
