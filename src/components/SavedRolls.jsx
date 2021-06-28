@@ -1,6 +1,7 @@
 import React from 'react';
 
-function SavedRolls({ handleRoll, dice, savedDie }) {
+function SavedRolls({ handleRoll, dice, savedDie, refreshPage }) {
+
   const handleReroll = (id) => {
     fetch(`https://allegretta-json-api.herokuapp.com/rolls/${id}`, {
       method: 'GET',
@@ -20,11 +21,12 @@ function SavedRolls({ handleRoll, dice, savedDie }) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(savedDie)
-    })
+    })//.then (refreshPage)
   }
 
   return (
     <div >
+      <h2>Saved Rolls</h2>
       {dice.map((dieRoll) => (
         <div key={dieRoll.id}>
           <h3>Name of Weapon:  {dieRoll.rollName}</h3>

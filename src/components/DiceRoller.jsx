@@ -5,6 +5,7 @@ import "../App"
 const DiceRoller = ({ setRollName, rollName, handleSave, handleRoll, setFaces, faces }) => {
 
     const handleSubmit = (e) => {
+        // console.log('handleSubmit Pressed')
         e.preventDefault();
     }
 

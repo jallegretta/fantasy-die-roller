@@ -4,35 +4,38 @@ import ResultList from './components/ResultList';
 import SavedRolls from './components/SavedRolls';
 import { v4 as uuid } from "uuid";
 import './css/App.css';
-import { useEffect } from 'react/cjs/react.development';
+import { useCallback, useEffect } from 'react/cjs/react.development';
 
 function App() {
   const [faces, setFaces] = useState()
   const [rollName, setRollName] = useState()
-  const [id, setId] = useState()
+  const [id] = useState()
   const [result, setResult] = useState()
   const [dice, setDice] = useState([])
-  const savedDie = { id, rollName, faces };
-  const [rolls, setRolls] = useState()
+  const savedDie = { id, rollName, faces }
+
+// function refreshPage(){
+//   window.location.reload(true);
+// }
 
   useEffect(() => {
-    fetch('https://allegretta-json-api.herokuapp.com/rolls')
+    fetch(`https://allegretta-json-api.herokuapp.com/rolls`)
       .then(res => {
         return res.json();
       })
       .then(dice => {
-        setRolls(dice)
-        setDice(dice);
+        setDice(dice)
         console.log(dice)
+        console.log('useEffect loding rolls from API fetch')
       });
-  }, []);
+  }, [dice]);
 
   const handleSave = () => {
     fetch(`https://allegretta-json-api.herokuapp.com/rolls/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(savedDie)
-    })
+    })//.then (refreshPage)
   };
 
   const handleUpdate = () => {
@@ -82,6 +85,7 @@ function App() {
         savedDie={savedDie}
         dice={dice}
         id={dice.id}
+        //refreshPage = {refreshPage}
       />
 
       <ResultList result={result} />
